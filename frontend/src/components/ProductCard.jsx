@@ -102,14 +102,15 @@ const styles = {
         textDecoration: 'none',
         color: 'inherit',
         overflow: 'hidden',
+        cursor: 'pointer',
     },
     imageWrapper: {
         position: 'relative',
         width: '100%',
-        paddingTop: '100%',
-        backgroundColor: 'var(--color-gray-lightest)',
+        paddingTop: '75%',
+        background: 'linear-gradient(135deg, #1e3a5f 0%, #2d5a88 100%)',
         overflow: 'hidden',
-        borderRadius: 'var(--radius-lg) var(--radius-lg) 0 0',
+        borderRadius: 'var(--radius-xl) var(--radius-xl) 0 0',
     },
     image: {
         position: 'absolute',
@@ -118,12 +119,18 @@ const styles = {
         width: '100%',
         height: '100%',
         objectFit: 'cover',
-        transition: 'transform var(--transition-base)',
+        transition: 'transform var(--transition-slow)',
     },
     featuredBadge: {
         position: 'absolute',
         top: 'var(--spacing-md)',
-        left: 'var(--spacing-md)',
+        right: 'var(--spacing-md)',
+        padding: '0.5rem 1rem',
+        background: 'var(--warm-orange)',
+        borderRadius: '20px',
+        fontWeight: 700,
+        fontSize: '0.9rem',
+        color: 'white',
     },
     overlay: {
         position: 'absolute',
@@ -149,10 +156,16 @@ const styles = {
     },
     category: {
         alignSelf: 'flex-start',
+        color: 'var(--electric-blue)',
+        fontSize: '0.85rem',
+        fontWeight: 600,
+        textTransform: 'uppercase',
+        letterSpacing: '0.5px',
+        marginBottom: '0.5rem',
     },
     title: {
-        fontSize: 'var(--font-size-lg)',
-        fontWeight: 600,
+        fontSize: '1.3rem',
+        fontWeight: 700,
         margin: 0,
         color: 'var(--text-primary)',
         overflow: 'hidden',
@@ -160,11 +173,13 @@ const styles = {
         display: '-webkit-box',
         WebkitLineClamp: 2,
         WebkitBoxOrient: 'vertical',
+        fontFamily: "'Space Mono', monospace",
     },
     description: {
-        fontSize: 'var(--font-size-sm)',
+        fontSize: '0.95rem',
         color: 'var(--text-secondary)',
         margin: 0,
+        marginBottom: '1.2rem',
     },
     rating: {
         display: 'flex',
@@ -183,7 +198,7 @@ const styles = {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginTop: 'var(--spacing-sm)',
+        marginTop: 'var(--spacing-lg)',
     },
     priceWrapper: {
         display: 'flex',
@@ -191,18 +206,22 @@ const styles = {
         gap: '2px',
     },
     comparePrice: {
-        fontSize: 'var(--font-size-sm)',
-        color: 'var(--text-muted)',
+        fontSize: '1.2rem',
+        color: 'var(--text-secondary)',
         textDecoration: 'line-through',
+        marginLeft: '0.5rem',
     },
     price: {
-        fontSize: 'var(--font-size-xl)',
+        fontSize: '1.8rem',
         fontWeight: 700,
-        color: 'var(--color-primary)',
+        color: 'var(--soft-mint)',
     },
     addButton: {
         whiteSpace: 'nowrap',
+        padding: '0.7rem 1.5rem',
+        borderRadius: '25px',
     },
 };
 
 export default ProductCard;
+

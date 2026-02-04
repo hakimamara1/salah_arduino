@@ -113,29 +113,30 @@ const Header = () => {
 
 const styles = {
     header: {
-        background: 'var(--bg-card)',
-        boxShadow: 'var(--shadow-md)',
+        background: 'rgba(26, 41, 66, 0.95)',
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
         position: 'sticky',
         top: 0,
         zIndex: 'var(--z-sticky)',
         backdropFilter: 'blur(10px)',
-        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+        borderBottom: '1px solid rgba(0, 217, 255, 0.2)',
+        animation: 'slideDown 0.6s ease-out',
     },
     headerInner: {
-        padding: '1rem 0',
+        padding: '1.5rem 0',
     },
     logo: {
         display: 'flex',
         alignItems: 'center',
-        gap: '0.75rem',
-        fontSize: 'var(--font-size-xl)',
+        gap: '0.5rem',
+        fontSize: '1.8rem',
         fontWeight: 700,
-        fontFamily: 'var(--font-heading)',
+        fontFamily: "'Space Mono', monospace",
         color: 'var(--text-primary)',
         textDecoration: 'none',
     },
     logoText: {
-        background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))',
+        background: 'var(--gradient-glow)',
         WebkitBackgroundClip: 'text',
         WebkitTextFillColor: 'transparent',
         backgroundClip: 'text',
@@ -143,14 +144,14 @@ const styles = {
     nav: {
         display: 'flex',
         alignItems: 'center',
-        gap: '2rem',
+        gap: '2.5rem',
     },
     navLink: {
         color: 'var(--text-primary)',
         fontSize: 'var(--font-size-base)',
         fontWeight: 500,
         textDecoration: 'none',
-        transition: 'color var(--transition-fast)',
+        transition: 'all 0.3s ease',
         position: 'relative',
     },
     cartWrapper: {
@@ -162,7 +163,7 @@ const styles = {
         position: 'absolute',
         top: '-8px',
         right: '-8px',
-        background: 'var(--color-secondary)',
+        background: 'var(--warm-orange)',
         color: 'white',
         borderRadius: '50%',
         width: '20px',
@@ -171,7 +172,7 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'center',
         fontSize: '0.75rem',
-        fontWeight: 'bold',
+        fontWeight: 700,
     },
     menuButton: {
         display: 'none',
@@ -186,8 +187,8 @@ const styles = {
         flexDirection: 'column',
         gap: '1rem',
         padding: '1rem',
-        backgroundColor: 'var(--bg-card)',
-        borderTop: '1px solid var(--color-gray-lighter)',
+        backgroundColor: 'rgba(26, 41, 66, 0.98)',
+        borderTop: '1px solid rgba(0, 217, 255, 0.2)',
     },
     mobileLink: {
         color: 'var(--text-primary)',
@@ -199,3 +200,4 @@ const styles = {
 };
 
 export default Header;
+
