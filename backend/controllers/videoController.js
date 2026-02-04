@@ -69,38 +69,44 @@ export const getVideoById = asyncHandler(async (req, res) => {
 
 /**
  * @route   POST /api/videos
- * @desc    Upload a new video
+ * @desc    Create a new video with pre-uploaded files
  * @access  Private/Admin
  */
 export const createVideo = asyncHandler(async (req, res) => {
-    const videoData = req.body;
+    const { title, description, category, difficulty, duration, video, thumbnail } = req.body;
 
-    // Handle video upload
-    if (!req.file) {
+    // Validate required fields
+    if (!title || !category || !video || !thumbnail) {
         return res.status(400).json({
             success: false,
-            message: 'Please upload a video file',
+            message: 'Please provide title, category, video, and thumbnail',
         });
     }
 
-    const result = await uploadVideo(req.file.buffer, 'arduino-shop/videos');
+    // Create video document
+    const videoData = {
+        title,
+        description,
+        category,
+        difficulty: difficulty || 'beginner',
+        duration,
+        videoUrl: video.url,
+        publicId: video.publicId,
+        thumbnail,
+        isActive: true,
+    };
 
-    videoData.videoUrl = result.url;
-    videoData.publicId = result.publicId;
-    videoData.thumbnail = result.thumbnail;
-    videoData.duration = result.duration;
-
-    const video = await Video.create(videoData);
+    const newVideo = await Video.create(videoData);
 
     res.status(201).json({
         success: true,
-        data: video,
+        data: newVideo,
     });
 });
 
 /**
  * @route   PUT /api/videos/:id
- * @desc    Update a video
+ * @desc    Update a video with pre-uploaded files
  * @access  Private/Admin
  */
 export const updateVideo = asyncHandler(async (req, res) => {
@@ -113,20 +119,37 @@ export const updateVideo = asyncHandler(async (req, res) => {
         });
     }
 
-    // Handle new video upload
-    if (req.file) {
-        // Delete old video
-        await deleteFile(video.publicId, 'video');
+    const { title, description, category, difficulty, duration, video: videoFile, thumbnail } = req.body;
 
-        const result = await uploadVideo(req.file.buffer, 'arduino-shop/videos');
+    // Build update object
+    const updateData = {
+        title: title || video.title,
+        description: description !== undefined ? description : video.description,
+        category: category || video.category,
+        difficulty: difficulty || video.difficulty,
+        duration: duration || video.duration,
+    };
 
-        req.body.videoUrl = result.url;
-        req.body.publicId = result.publicId;
-        req.body.thumbnail = result.thumbnail;
-        req.body.duration = result.duration;
+    // Update video URL if new video provided
+    if (videoFile && videoFile.url) {
+        // Optional: Delete old video from Cloudinary
+        if (video.publicId) {
+            try {
+                await deleteFile(video.publicId, 'video');
+            } catch (error) {
+                console.warn('Could not delete old video:', error.message);
+            }
+        }
+        updateData.videoUrl = videoFile.url;
+        updateData.publicId = videoFile.publicId;
     }
 
-    video = await Video.findByIdAndUpdate(req.params.id, req.body, {
+    // Update thumbnail if new one provided
+    if (thumbnail && thumbnail.url) {
+        updateData.thumbnail = thumbnail;
+    }
+
+    video = await Video.findByIdAndUpdate(req.params.id, updateData, {
         new: true,
         runValidators: true,
     });

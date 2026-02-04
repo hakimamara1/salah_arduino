@@ -44,7 +44,7 @@ const VideoList = () => {
             <div style={styles.header}>
                 <h1 style={styles.title}>Videos</h1>
                 <Link to="/admin/videos/create" className="btn btn-primary">
-                    + Add Video
+                    + Upload Video
                 </Link>
             </div>
 

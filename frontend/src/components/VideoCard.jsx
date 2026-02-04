@@ -2,31 +2,31 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const VideoCard = ({ video }) => {
-    const formatDuration = (seconds) => {
-        const mins = Math.floor(seconds / 60);
-        const secs = Math.floor(seconds % 60);
-        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    const formatDuration = (duration) => {
+        // Duration is already formatted as MM:SS or HH:MM:SS
+        return duration || 'N/A';
     };
 
     const getCategoryColor = (category) => {
         const colors = {
-            beginner: 'var(--color-success)',
-            intermediate: 'var(--color-info)',
-            advanced: 'var(--color-secondary)',
-            tutorial: 'var(--color-primary)',
-            project: 'var(--color-accent)',
-            review: 'var(--color-warning)',
+            'Getting Started': 'var(--color-success)',
+            'Sensors': 'var(--color-info)',
+            'Motors & Actuators': 'var(--color-warning)',
+            'Communication': 'var(--color-primary)',
+            'Display': '#9333ea',
+            'Projects': 'var(--color-accent)',
+            'Advanced': 'var(--color-secondary)',
         };
         return colors[category] || 'var(--color-primary)';
     };
 
     return (
-        <Link to={`/videos#${video._id}`} style={styles.card} className="card">
+        <Link to={`/videos/${video._id}`} style={styles.card} className="card">
             {/* Thumbnail */}
             <div style={styles.thumbnailWrapper}>
                 <img
-                    src={video.thumbnail || video.videoUrl.replace(/\.[^.]+$/, '.jpg')}
-                    alt={video.title}
+                    src={video.thumbnail?.url || video.videoUrl.replace(/\.[^.]+$/, '.jpg')}
+                    alt={video.thumbnail?.alt || video.title}
                     style={styles.thumbnail}
                     loading="lazy"
                 />

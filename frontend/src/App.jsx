@@ -9,6 +9,7 @@ import { AuthProvider } from './context/AuthContext';
 const HomePage = lazy(() => import('./pages/HomePage'));
 const ProductDetailsPage = lazy(() => import('./pages/ProductDetailsPage'));
 const VideoLearnerPage = lazy(() => import('./pages/VideoLearnerPage'));
+const VideoPlayerPage = lazy(() => import('./pages/VideoPlayerPage'));
 const CartPage = lazy(() => import('./pages/CartPage'));
 const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
 
@@ -23,6 +24,8 @@ const OrderList = lazy(() => import('./admin/pages/OrderList'));
 const OrderDetail = lazy(() => import('./admin/pages/OrderDetail'));
 const CategoryList = lazy(() => import('./admin/pages/CategoryList'));
 const VideoList = lazy(() => import('./admin/pages/VideoList'));
+const VideoCreate = lazy(() => import('./admin/pages/VideoCreate'));
+const VideoEdit = lazy(() => import('./admin/pages/VideoEdit'));
 const UserList = lazy(() => import('./admin/pages/UserList'));
 const AdminRoute = lazy(() => import('./admin/components/AdminRoute'));
 
@@ -50,6 +53,7 @@ function App() {
                                             <Route path="/" element={<HomePage />} />
                                             <Route path="/products/:slug" element={<ProductDetailsPage />} />
                                             <Route path="/videos" element={<VideoLearnerPage />} />
+                                            <Route path="/videos/:id" element={<VideoPlayerPage />} />
                                             <Route path="/cart" element={<CartPage />} />
                                             <Route path="/checkout" element={<CheckoutPage />} />
                                         </Routes>
@@ -79,6 +83,8 @@ function App() {
                             <Route path="orders/:id" element={<OrderDetail />} />
                             <Route path="categories" element={<CategoryList />} />
                             <Route path="videos" element={<VideoList />} />
+                            <Route path="videos/create" element={<VideoCreate />} />
+                            <Route path="videos/edit/:id" element={<VideoEdit />} />
                             <Route path="users" element={<UserList />} />
                         </Route>
                     </Routes>

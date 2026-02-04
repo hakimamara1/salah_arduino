@@ -14,7 +14,6 @@ const videoSchema = new mongoose.Schema(
         },
         description: {
             type: String,
-            required: [true, 'Video description is required'],
             maxlength: [1000, 'Description cannot exceed 1000 characters'],
         },
         // Cloudinary video data
@@ -27,15 +26,22 @@ const videoSchema = new mongoose.Schema(
             required: true,
         },
         thumbnail: {
-            type: String,
+            url: { type: String, required: true },
+            publicId: { type: String },
+            alt: { type: String },
         },
         duration: {
-            type: Number, // in seconds
+            type: String, // Format: "MM:SS" or "HH:MM:SS"
         },
         category: {
             type: String,
-            enum: ['beginner', 'intermediate', 'advanced', 'tutorial', 'project', 'review'],
-            default: 'tutorial',
+            required: [true, 'Category is required'],
+            enum: ['Getting Started', 'Sensors', 'Motors & Actuators', 'Communication', 'Display', 'Projects', 'Advanced'],
+        },
+        difficulty: {
+            type: String,
+            enum: ['beginner', 'intermediate', 'advanced'],
+            default: 'beginner',
         },
         tags: [
             {

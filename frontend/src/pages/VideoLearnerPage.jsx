@@ -24,7 +24,15 @@ const VideoLearnerPage = () => {
             }),
     });
 
-    const categories = ['beginner', 'intermediate', 'advanced', 'tutorial', 'project', 'review'];
+    const categories = [
+        'Getting Started',
+        'Sensors',
+        'Motors & Actuators',
+        'Communication',
+        'Display',
+        'Projects',
+        'Advanced'
+    ];
 
     return (
         <div>

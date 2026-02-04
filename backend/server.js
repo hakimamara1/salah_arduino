@@ -39,7 +39,11 @@ app.use(compression());
 
 // CORS configuration
 const corsOptions = {
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173' || 'http://localhost:4173',
+    origin: [
+        'http://localhost:5173',
+        'http://localhost:4173',
+        process.env.FRONTEND_URL
+    ].filter(Boolean),
     credentials: true,
     optionsSuccessStatus: 200,
 };
